@@ -71,12 +71,11 @@ function createWhisperingForest() {
       w: TILE_SIZE * 2, h: TILE_SIZE * 2,
       target: 'sunflower_town', spawnX: 26, spawnY: 17
     },
-    // Forward to Crystal Lake (east side) — blocked until shadow_tailor is defeated
+    // Forward to Crystal Lake (east side)
     {
       x: (W - 2) * TILE_SIZE, y: 17 * TILE_SIZE,
       w: TILE_SIZE * 2, h: TILE_SIZE * 2,
-      target: 'crystal_lake', spawnX: 3, spawnY: 8,
-      requiresBoss: 'shadow_tailor'
+      target: 'crystal_lake', spawnX: 3, spawnY: 8
     }
   ];
 

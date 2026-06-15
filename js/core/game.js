@@ -53,6 +53,8 @@ const Game = (() => {
     Input.init();
     const saved = Save.load();
     Object.assign(state, saved);
+    state.maxHp = 20;
+    if (state.hp > 20) state.hp = 20;
     runTitleAnim();
     requestAnimationFrame(loop);
 
