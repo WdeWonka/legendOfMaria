@@ -43,7 +43,7 @@ const Cutscenes = (() => {
     await showCutsceneText("...", 1000);
     await showCutsceneText("*bosteza*\nBuenos días...", 1800);
     await showCutsceneText("Espera...\n¡¿Dónde está mi traje?!", 2000);
-    await showCutsceneText("Y... ¡mi Bastón Dorado!\n¡DESAPARECIERON!", 2200);
+    await showCutsceneText("Y... ¡mi Pole Dorado!\n¡DESAPARECIERON!", 2200);
     await showCutsceneText(
       '"Los sueños se ganan."\n"Ven a encontrarnos."',
       2500,
@@ -53,7 +53,7 @@ const Cutscenes = (() => {
     await drawFriendScene(1000);
     await showCutsceneText("Tatiana: ¡María!\n¡Esto es terrible!", 1800);
     await showCutsceneText(
-      "Tatiana: ¡Tu traje desapareció!\n¡Y tu bastón también!",
+      "Tatiana: ¡Tu traje desapareció!\n¡Y tu pole también!",
       2000,
     );
     await showCutsceneText(
@@ -365,13 +365,25 @@ const Cutscenes = (() => {
       "Y otra vez.",
       "Y otra vez.",
       "Feliz Aniversario de 2 Años ❤️",
-      "— Con todo mi amor.",
+      "— Con todo mi amor, William ❤️",
+      "Fin",
     ];
 
     for (const msg of messages) {
       await typeMessage(msg, 60);
-      await Utils.wait(1400);
+      await Utils.wait(msg === "Fin" ? 3000 : 1400);
     }
+
+    // Fade out the final layer, then return to title
+    await new Promise((resolve) => {
+      finalLayer.style.transition = "opacity 1.5s";
+      finalLayer.style.opacity = "0";
+      setTimeout(resolve, 1500);
+    });
+    finalLayer.classList.add("hidden");
+    finalLayer.style.transition = "";
+    finalLayer.style.opacity = "";
+    finalMsg.textContent = "";
 
     if (callback) callback();
   }

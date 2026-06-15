@@ -246,7 +246,7 @@ const Game = (() => {
         setTimeout(() => {
           Cutscenes.playVictory(() => {
             mode = 'final';
-            Cutscenes.playFinal(() => {});
+            Cutscenes.playFinal(() => goToTitle());
           });
         }, 2500);
       }
@@ -346,7 +346,7 @@ const Game = (() => {
           state.hasPole = true;
           HUD.setPole(true);
           Audio.SFX.itemGet();
-          Notifications.show('⚡ ¡Obtuviste: Bastón Dorado!', 3500);
+          Notifications.show('⚡ ¡Obtuviste: Pole Dorado!', 3500);
         }
         if (state.hasCostume && state.hasPole) {
           setTimeout(() => Notifications.show('✨ ¡Ambos objetos recuperados! ¡Ve al Arena!', 4000), 2000);
@@ -375,9 +375,9 @@ const Game = (() => {
 
     if (targetMap === 'championship_arena' && (!state.hasCostume || !state.hasPole)) {
       if (!Dialogue.isActive()) {
-        const missing = !state.hasCostume && !state.hasPole ? 'tu Traje y el Bastón Dorado'
+        const missing = !state.hasCostume && !state.hasPole ? 'tu Traje y el Pole Dorado'
           : !state.hasCostume ? 'tu Traje del Campeonato'
-          : 'tu Bastón Dorado de Competencia';
+          : 'tu Pole Dorado de Competencia';
         Dialogue.show([["Guard Rex", `Necesitas ${missing}\n¡antes de entrar al Arena!`, "¡Ve a encontrarlos primero!"]]);
       }
       return;
