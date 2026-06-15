@@ -17,7 +17,6 @@ const Game = (() => {
   let player       = null;
   let lastTime     = 0;
   let titleAnim    = 0;
-  let arenaTriggered = false;
   let mapChanging  = false;
 
   const state = {
@@ -238,22 +237,6 @@ const Game = (() => {
       }
     }
 
-    // ── Arena trigger ───────────────────────────────────────────
-    if (state.currentMap === 'championship_arena' && !arenaTriggered) {
-      if (!state.hasCostume || !state.hasPole) {
-        // Block with guard dialogue handled via NPC
-      } else {
-        arenaTriggered = true;
-        mode = 'victory';
-        setTimeout(() => {
-          Cutscenes.playVictory(() => {
-            mode = 'final';
-            Cutscenes.playFinal(() => goToTitle());
-          });
-        }, 2500);
-      }
-    }
-
     // ── Auto-save ───────────────────────────────────────────────
     Save.save(state);
     Input.endFrame();
@@ -375,6 +358,17 @@ const Game = (() => {
   function changeMap(targetMap, spawnX, spawnY) {
     if (mapChanging) return;
 
+    if (targetMap === '__victory__') {
+      mode = 'victory';
+      setTimeout(() => {
+        Cutscenes.playVictory(() => {
+          mode = 'final';
+          Cutscenes.playFinal(() => goToTitle());
+        });
+      }, 2500);
+      return;
+    }
+
     if (targetMap === 'championship_arena' && (!state.hasCostume || !state.hasPole)) {
       if (!Dialogue.isActive()) {
         const missing = !state.hasCostume && !state.hasPole ? 'tu Traje y el Pole Dorado'
@@ -415,7 +409,6 @@ const Game = (() => {
     mode         = 'title';
     currentMap   = null;
     player       = null;
-    arenaTriggered = false;
     mapChanging  = false;
     titleEl.classList.remove('hidden');
     HUD.hide();

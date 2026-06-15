@@ -53,8 +53,14 @@ function createChampionshipArena() {
     new Collectible(22,  6, 'coin',   null),
   ];
 
-  // No back transition from arena (can add if needed)
-  map.transitions = [];
+  // Walking to the stage exit triggers the ending
+  map.transitions = [
+    {
+      x: 11 * TILE_SIZE, y: 4 * TILE_SIZE,
+      w: 8 * TILE_SIZE,  h: TILE_SIZE,
+      target: '__victory__'
+    }
+  ];
 
   return map;
 }
