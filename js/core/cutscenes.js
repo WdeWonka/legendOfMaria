@@ -257,7 +257,7 @@ const Cutscenes = (() => {
         // Maria
         Sprites.drawMaria(ctx, 200, 120, 'right', 0, false);
 
-        // Sofia running in
+        // Tatiana running in
         const sofiaX = Utils.lerp(480, 300, Utils.easeOut(Math.min(1, t * 2)));
         Sprites.drawNPC(ctx, sofiaX, 130, 'best_friend', Math.floor(elapsed/100)%2);
 

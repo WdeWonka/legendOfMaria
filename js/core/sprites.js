@@ -1242,7 +1242,7 @@ const Sprites = {
 
     switch (characterKey) {
       case 'Maria':          this._portraitMaria(ctx); break;
-      case 'Sofia':          this._portraitSofia(ctx); break;
+      case 'Tatiana':        this._portraitSofia(ctx); break;
       case 'Grandma Rose':   this._portraitOldLady(ctx); break;
       case 'Luna':           this._portraitDancer(ctx); break;
       case 'Timmy':          this._portraitKid(ctx); break;

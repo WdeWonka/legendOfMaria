@@ -94,7 +94,16 @@ class Tilemap {
     // Check transition
     if (!Dialogue.isActive()) {
       const trans = this.getTransition(player.hitbox);
-      if (trans) game.changeMap(trans.target, trans.spawnX, trans.spawnY);
+      if (trans) {
+        if (trans.requiresBoss && !game.state.defeatedBosses.includes(trans.requiresBoss)) {
+          if ((this._blockNotifCooldown = (this._blockNotifCooldown || 0) - dt) <= 0) {
+            Notifications.show('⚔️ ¡Derrota al jefe primero!', 2500);
+            this._blockNotifCooldown = 3;
+          }
+        } else {
+          game.changeMap(trans.target, trans.spawnX, trans.spawnY);
+        }
+      }
     }
   }
 

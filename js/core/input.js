@@ -33,15 +33,15 @@ const Input = (() => {
     if (!base || !knob) return;
 
     const DEAD   = 10;   // pixels dead zone
-    const MAX_R  = 28;   // max knob travel radius
     let active   = false;
 
     function move(cx, cy) {
-      const r  = base.getBoundingClientRect();
-      const ox = r.left + r.width  / 2;
-      const oy = r.top  + r.height / 2;
-      const dx = cx - ox;
-      const dy = cy - oy;
+      const r     = base.getBoundingClientRect();
+      const MAX_R = r.width * 0.33; // ~33% of diameter, scales with CSS size
+      const ox    = r.left + r.width  / 2;
+      const oy    = r.top  + r.height / 2;
+      const dx    = cx - ox;
+      const dy    = cy - oy;
       const dist  = Math.hypot(dx, dy);
       const clamp = Math.min(dist, MAX_R);
       const angle = Math.atan2(dy, dx);
