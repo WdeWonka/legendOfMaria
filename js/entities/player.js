@@ -19,6 +19,7 @@ class Player {
     this.maxHp = 5;
     this.invincibleTimer = 0;
 
+    this.attackDamage   = 15;
     this.attacking      = false;
     this.attackTimer    = 0;
     this.attackProgress = 0;

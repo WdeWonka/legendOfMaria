@@ -132,6 +132,7 @@ const Game = (() => {
       player.y = py;
       player.attacking = false;
     }
+    player.attackDamage = 15 + state.memoriesCollected.length * 5;
 
     Camera.follow(player.cx, player.cy, currentMap.pixelW, currentMap.pixelH);
   }
@@ -361,6 +362,7 @@ const Game = (() => {
   function collectMemory(id) {
     if (!state.memoriesCollected.includes(id)) {
       state.memoriesCollected.push(id);
+      if (player) player.attackDamage = 15 + state.memoriesCollected.length * 5;
       const mem = MEMORY_DATA.find(m => m.id === id);
       if (mem) Notifications.show(`${mem.icon} Memoria: ${mem.subtitle}`, 3000);
       Save.save(state);

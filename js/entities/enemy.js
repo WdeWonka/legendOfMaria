@@ -110,7 +110,7 @@ class Enemy {
       this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h
     )) {
       if (player.attacking && this.knockTimer <= 0) {
-        this.hit(dx, dy, 10);
+        this.hit(dx, dy, player.attackDamage);
       }
     }
   }

@@ -121,7 +121,7 @@ class Boss {
         atkHitbox.x, atkHitbox.y, atkHitbox.w, atkHitbox.h,
         this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h
       )) {
-        this.hit(dx, dy, 10, game);
+        this.hit(dx, dy, player.attackDamage, game);
       }
     }
 
