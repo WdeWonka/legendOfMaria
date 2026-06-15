@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>The Legend of Maria: Dance of Destiny 💜</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/console.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+</head>
+<body>
+  <!-- Console Shell -->
+  <div id="console-shell">
+
+    <!-- Top Speaker Grille -->
+    <div class="speaker-grille top-grille">
+      <div class="grille-dots"></div>
+      <div class="console-logo">✦ MariaStation ✦</div>
+      <div class="grille-dots"></div>
+    </div>
+
+    <!-- Screen Section -->
+    <div id="screen-section">
+      <div id="screen-bezel">
+        <div id="screen-inner">
+          <!-- Game Canvas -->
+          <canvas id="gameCanvas" width="480" height="320"></canvas>
+
+          <!-- UI Overlays rendered on top of canvas -->
+          <div id="ui-overlay">
+            <!-- HUD -->
+            <div id="hud" class="hidden">
+              <div id="hud-left">
+                <div id="hearts-container">
+                  <span class="heart full" data-heart="1">♥</span>
+                  <span class="heart full" data-heart="2">♥</span>
+                  <span class="heart full" data-heart="3">♥</span>
+                  <span class="heart full" data-heart="4">♥</span>
+                  <span class="heart full" data-heart="5">♥</span>
+                </div>
+                <div id="coins-display">✦ <span id="coin-count">0</span></div>
+              </div>
+              <div id="hud-right">
+                <div id="item-costume" class="hud-item missing" title="Traje del Campeonato">
+                  <span class="item-icon">👗</span>
+                  <span class="item-label">Traje</span>
+                </div>
+                <div id="item-pole" class="hud-item missing" title="Bastón Dorado">
+                  <span class="item-icon">⚡</span>
+                  <span class="item-label">Bastón</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dialogue Box -->
+            <div id="dialogue-box" class="hidden">
+              <div id="dialogue-portrait">
+                <canvas id="portrait-canvas" width="48" height="48"></canvas>
+              </div>
+              <div id="dialogue-content">
+                <div id="dialogue-name"></div>
+                <div id="dialogue-text"></div>
+                <div id="dialogue-continue">▼</div>
+              </div>
+            </div>
+
+            <!-- Boss Health Bar -->
+            <div id="boss-hud" class="hidden">
+              <div id="boss-name-label">Boss Name</div>
+              <div id="boss-health-bar-wrap">
+                <div id="boss-health-bar"></div>
+              </div>
+            </div>
+
+            <!-- Title Screen -->
+            <div id="title-screen">
+              <div id="title-stars"></div>
+              <div id="title-content">
+                <div id="title-logo">
+                  <div class="title-line1">✦ THE LEGEND OF ✦</div>
+                  <div class="title-line2">MARIA</div>
+                  <div class="title-line3">Dance of Destiny</div>
+                </div>
+                <div id="title-sprite-area">
+                  <canvas id="title-sprite-canvas" width="64" height="64"></canvas>
+                </div>
+                <div id="title-press-start" class="blink">Presiona START para Comenzar</div>
+                <div id="title-hearts">♥ ♥ ♥</div>
+              </div>
+            </div>
+
+            <!-- Pause Menu -->
+            <div id="pause-menu" class="hidden">
+              <div id="pause-overlay"></div>
+              <div id="pause-panel">
+                <div class="pause-title">✦ PAUSA ✦</div>
+                <ul id="pause-list">
+                  <li class="pause-item selected" data-action="continue">▶ Continuar</li>
+                  <li class="pause-item" data-action="memories">💜 Memorias</li>
+                  <li class="pause-item" data-action="controls">🎮 Controles</li>
+                  <li class="pause-item" data-action="about">✦ Acerca de</li>
+                  <li class="pause-item" data-action="title">↩ Pantalla de Inicio</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Memory Panel -->
+            <div id="memory-panel" class="hidden">
+              <div id="memory-overlay"></div>
+              <div id="memory-container">
+                <div class="memory-header">💜 Memorias 💜</div>
+                <div id="memory-grid"></div>
+                <div id="memory-detail" class="hidden">
+                  <div id="memory-detail-title"></div>
+                  <div id="memory-detail-text"></div>
+                  <button id="memory-back-btn">← Atrás</button>
+                </div>
+                <button id="memory-close-btn">Cerrar ✕</button>
+              </div>
+            </div>
+
+            <!-- Controls Help -->
+            <div id="controls-panel" class="hidden">
+              <div id="controls-overlay"></div>
+              <div id="controls-container">
+                <div class="controls-title">🎮 Controles</div>
+                <div class="controls-grid">
+                  <div class="ctrl-section">
+                    <div class="ctrl-heading">Móvil</div>
+                    <div class="ctrl-row"><span class="ctrl-key">D-Pad</span><span class="ctrl-desc">Mover</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">A</span><span class="ctrl-desc">Atacar / Confirmar</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">B</span><span class="ctrl-desc">Correr</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">START</span><span class="ctrl-desc">Pausa</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">SELECT</span><span class="ctrl-desc">Memorias</span></div>
+                  </div>
+                  <div class="ctrl-section">
+                    <div class="ctrl-heading">Teclado</div>
+                    <div class="ctrl-row"><span class="ctrl-key">Flechas</span><span class="ctrl-desc">Mover</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">Z</span><span class="ctrl-desc">Atacar / Confirmar</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">X</span><span class="ctrl-desc">Correr</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">Enter</span><span class="ctrl-desc">Pausa</span></div>
+                    <div class="ctrl-row"><span class="ctrl-key">Shift</span><span class="ctrl-desc">Memorias</span></div>
+                  </div>
+                </div>
+                <button id="controls-close-btn">Cerrar ✕</button>
+              </div>
+            </div>
+
+            <!-- About Panel -->
+            <div id="about-panel" class="hidden">
+              <div id="about-overlay"></div>
+              <div id="about-container">
+                <div class="about-title">✦ Acerca de ✦</div>
+                <div class="about-text">
+                  <p>Hecho con ♥ para María</p>
+                  <p>en nuestro Aniversario de 2 Años</p>
+                  <br/>
+                  <p>Una aventura inspirada en Pokémon</p>
+                  <p>a través del reino de los sueños.</p>
+                  <br/>
+                  <p>Encuentra tu traje.</p>
+                  <p>Encuentra tu bastón.</p>
+                  <p>Conviértete en campeona.</p>
+                </div>
+                <button id="about-close-btn">Cerrar ✕</button>
+              </div>
+            </div>
+
+            <!-- Floating Notification -->
+            <div id="notification" class="hidden">
+              <span id="notification-text"></span>
+            </div>
+
+            <!-- Transition Overlay -->
+            <div id="transition-overlay"></div>
+
+            <!-- Cutscene Layer -->
+            <div id="cutscene-layer" class="hidden">
+              <canvas id="cutscene-canvas" width="480" height="320"></canvas>
+              <div id="cutscene-text-box" class="hidden">
+                <div id="cutscene-text"></div>
+              </div>
+            </div>
+
+            <!-- Final Scene -->
+            <div id="final-scene" class="hidden">
+              <canvas id="final-canvas" width="480" height="320"></canvas>
+              <div id="final-text-overlay">
+                <div id="final-message"></div>
+              </div>
+            </div>
+
+          </div><!-- /ui-overlay -->
+        </div><!-- /screen-inner -->
+      </div><!-- /screen-bezel -->
+    </div><!-- /screen-section -->
+
+    <!-- Controls Section -->
+    <div id="controls-section">
+
+      <!-- Left D-Pad -->
+      <div id="dpad-area">
+        <div id="dpad">
+          <button class="dpad-btn dpad-up" data-dir="up">▲</button>
+          <button class="dpad-btn dpad-left" data-dir="left">◀</button>
+          <button class="dpad-btn dpad-center">✦</button>
+          <button class="dpad-btn dpad-right" data-dir="right">▶</button>
+          <button class="dpad-btn dpad-down" data-dir="down">▼</button>
+        </div>
+      </div>
+
+      <!-- Center Buttons -->
+      <div id="center-buttons">
+        <div id="system-btns">
+          <button class="sys-btn" id="btn-select" data-action="select">SELECT</button>
+          <button class="sys-btn" id="btn-start" data-action="start">START</button>
+        </div>
+        <div id="console-emblem">
+          <div class="emblem-ring">
+            <span class="emblem-text">M</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Action Buttons -->
+      <div id="action-buttons">
+        <div id="action-btn-layout">
+          <button class="action-btn btn-a" id="btn-a" data-action="a">A</button>
+          <button class="action-btn btn-b" id="btn-b" data-action="b">B</button>
+        </div>
+      </div>
+
+    </div><!-- /controls-section -->
+
+    <!-- Bottom Speaker -->
+    <div class="speaker-grille bottom-grille">
+      <div class="grille-line"></div>
+      <div class="grille-line"></div>
+      <div class="grille-line"></div>
+    </div>
+
+  </div><!-- /console-shell -->
+
+  <!-- Audio Context notice -->
+  <div id="audio-notice" class="hidden">🔊 Toca para activar el sonido</div>
+
+  <!-- Scripts -->
+  <script src="js/core/constants.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/sprites.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/input.js"></script>
+  <script src="js/core/camera.js"></script>
+  <script src="js/core/save.js"></script>
+  <script src="js/ui/dialogue.js"></script>
+  <script src="js/ui/hud.js"></script>
+  <script src="js/ui/menus.js"></script>
+  <script src="js/ui/notifications.js"></script>
+  <script src="js/entities/player.js"></script>
+  <script src="js/entities/npc.js"></script>
+  <script src="js/entities/enemy.js"></script>
+  <script src="js/entities/boss.js"></script>
+  <script src="js/entities/collectible.js"></script>
+  <script src="js/maps/tilemap.js"></script>
+  <script src="js/maps/sunflower-town.js"></script>
+  <script src="js/maps/whispering-forest.js"></script>
+  <script src="js/maps/crystal-lake.js"></script>
+  <script src="js/maps/crystal-cave.js"></script>
+  <script src="js/maps/championship-arena.js"></script>
+  <script src="js/core/cutscenes.js"></script>
+  <script src="js/core/game.js"></script>
+</body>
+</html>

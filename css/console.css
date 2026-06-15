@@ -1,0 +1,340 @@
+/* ============================================================
+   THE LEGEND OF MARIA - Console Shell CSS
+   Maria-themed handheld: Lavender / Soft Purple / Pink / White
+   ============================================================ */
+
+/* ---------- Console Shell ---------- */
+#console-shell {
+  position: relative;
+  z-index: 1;
+  width: min(440px, 96vw);
+  background: linear-gradient(160deg, #e8d5f5 0%, #d4b8ee 20%, #c9a8e8 50%, #d0b0e6 80%, #ddc0f0 100%);
+  border-radius: 24px 24px 40px 40px;
+  box-shadow:
+    0 0 0 3px #b08ace,
+    0 0 0 5px #c9a8e8,
+    0 8px 40px rgba(120,60,180,0.5),
+    inset 0 2px 4px rgba(255,255,255,0.7),
+    inset 0 -4px 8px rgba(100,40,140,0.2);
+  padding: 12px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---------- Speaker Grilles ---------- */
+.speaker-grille {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 8px;
+  gap: 8px;
+}
+
+.top-grille {
+  flex-direction: row;
+}
+
+.console-logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #7c3aed;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  flex: 1;
+  text-align: center;
+}
+
+.grille-dots {
+  width: 36px;
+  height: 10px;
+  background-image: radial-gradient(circle, #b08ace 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.bottom-grille {
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 40px;
+}
+
+.grille-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #b08ace 20%, #b08ace 80%, transparent);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* ---------- Screen Section ---------- */
+#screen-section {
+  position: relative;
+}
+
+#screen-bezel {
+  background: #1a0030;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,0.8),
+    inset 0 0 20px rgba(0,0,0,0.6),
+    0 2px 0 rgba(255,255,255,0.3);
+  position: relative;
+}
+
+/* Screen power light */
+#screen-bezel::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 16px;
+  width: 6px;
+  height: 6px;
+  background: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #00ff88, 0 0 10px #00ff8866;
+  animation: powerPulse 2s ease-in-out infinite;
+}
+
+@keyframes powerPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+#screen-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 66.666%; /* 480x320 aspect ratio */
+  border-radius: 4px;
+  overflow: hidden;
+  background: #0a001a;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+}
+
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---------- Controls Section ---------- */
+#controls-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  min-height: 110px;
+}
+
+/* ---------- D-Pad ---------- */
+#dpad-area {
+  flex: 0 0 auto;
+}
+
+#dpad {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: grid;
+  grid-template-areas:
+    ". up ."
+    "left center right"
+    ". down .";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 2px;
+}
+
+.dpad-btn {
+  background: linear-gradient(135deg, #b090d8 0%, #9060c0 50%, #7840a8 100%);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 #4a2070, inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform 0.05s, box-shadow 0.05s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  pointer-events: all;
+}
+
+.dpad-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #4a2070;
+}
+
+.dpad-up    { grid-area: up; }
+.dpad-left  { grid-area: left; }
+.dpad-center {
+  grid-area: center;
+  background: linear-gradient(135deg, #c0a0e0 0%, #a880d0 100%);
+  font-size: 8px;
+  pointer-events: none;
+}
+.dpad-right { grid-area: right; }
+.dpad-down  { grid-area: down; }
+
+/* ---------- Center Buttons ---------- */
+#center-buttons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#system-btns {
+  display: flex;
+  gap: 12px;
+}
+
+.sys-btn {
+  background: linear-gradient(135deg, #c8a0e8 0%, #a870d0 100%);
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  padding: 5px 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #6a3090, inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 0.05s, box-shadow 0.05s;
+  pointer-events: all;
+  letter-spacing: 0.5px;
+}
+
+.sys-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #6a3090;
+}
+
+#console-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emblem-ring {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f0d0ff 0%, #d090f0 50%, #a850d0 100%);
+  border: 2px solid #7830a0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(180,100,255,0.6), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.emblem-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #5010a0;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* ---------- Action Buttons ---------- */
+#action-buttons {
+  flex: 0 0 auto;
+}
+
+#action-btn-layout {
+  display: grid;
+  grid-template-areas:
+    ". a"
+    "b .";
+  grid-template-columns: 36px 36px;
+  grid-template-rows: 36px 36px;
+  gap: 4px;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 0.05s, box-shadow 0.05s;
+  pointer-events: all;
+}
+
+.action-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+
+.btn-a {
+  grid-area: a;
+  background: linear-gradient(135deg, #ff99cc 0%, #ff55aa 50%, #ee2288 100%);
+  color: #fff;
+  box-shadow: 0 3px 0 #aa0066, inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn-a:active { box-shadow: 0 1px 0 #aa0066; }
+
+.btn-b {
+  grid-area: b;
+  background: linear-gradient(135deg, #bb99ee 0%, #9966dd 50%, #7733cc 100%);
+  color: #fff;
+  box-shadow: 0 3px 0 #440099, inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn-b:active { box-shadow: 0 1px 0 #440099; }
+
+/* ---------- Responsive Console ---------- */
+@media (max-width: 460px) {
+  #console-shell {
+    width: 100vw;
+    border-radius: 0;
+    min-height: 100dvh;
+    justify-content: center;
+  }
+
+  #screen-bezel {
+    padding: 8px;
+  }
+
+  #dpad {
+    width: 80px;
+    height: 80px;
+  }
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 9px;
+  }
+
+  #action-btn-layout {
+    grid-template-columns: 32px 32px;
+    grid-template-rows: 32px 32px;
+  }
+}
+
+@media (min-width: 700px) and (min-height: 700px) {
+  #console-shell {
+    width: 480px;
+  }
+}
