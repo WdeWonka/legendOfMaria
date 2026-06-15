@@ -63,19 +63,19 @@ function createWhisperingForest() {
     new Collectible(22, 14, 'coin',   null),
   ];
 
-  // Transitions
+  // Transitions — placed 1 tile inside border walls to be reachable
   map.transitions = [
     // Back to Sunflower Town (west side)
     {
-      x: 0, y: 17 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
-      target: 'sunflower_town', spawnX: 27, spawnY: 17
+      x: TILE_SIZE, y: 17 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
+      target: 'sunflower_town', spawnX: 26, spawnY: 17
     },
     // Forward to Crystal Lake (east side)
     {
-      x: (W - 1) * TILE_SIZE, y: 17 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
-      target: 'crystal_lake', spawnX: 2, spawnY: 8
+      x: (W - 2) * TILE_SIZE, y: 17 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
+      target: 'crystal_lake', spawnX: 3, spawnY: 8
     }
   ];
 

@@ -56,19 +56,19 @@ function createCrystalLake() {
     new Collectible(6,  12, 'heart',  null),
   ];
 
-  // Transitions
+  // Transitions — placed 1 tile inside border walls to be reachable
   map.transitions = [
     // Back to Forest (west)
     {
-      x: 0, y: 8 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
-      target: 'whispering_forest', spawnX: 29, spawnY: 17
+      x: TILE_SIZE, y: 8 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
+      target: 'whispering_forest', spawnX: 28, spawnY: 17
     },
     // To Crystal Cave (east, bridge area)
     {
-      x: (W - 1) * TILE_SIZE, y: 8 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
-      target: 'crystal_cave', spawnX: 2, spawnY: 8
+      x: (W - 2) * TILE_SIZE, y: 8 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
+      target: 'crystal_cave', spawnX: 3, spawnY: 8
     }
   ];
 

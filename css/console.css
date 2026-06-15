@@ -139,57 +139,48 @@
   min-height: 110px;
 }
 
-/* ---------- D-Pad ---------- */
-#dpad-area {
+/* ---------- Virtual Joystick ---------- */
+#joystick-area {
   flex: 0 0 auto;
-}
-
-#dpad {
-  position: relative;
-  width: 90px;
-  height: 90px;
-  display: grid;
-  grid-template-areas:
-    ". up ."
-    "left center right"
-    ". down .";
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 2px;
-}
-
-.dpad-btn {
-  background: linear-gradient(135deg, #b090d8 0%, #9060c0 50%, #7840a8 100%);
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 10px;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 0 #4a2070, inset 0 1px 0 rgba(255,255,255,0.3);
-  transition: transform 0.05s, box-shadow 0.05s;
+}
+
+#joystick-base {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #c8a8e8 0%, #9060c0 55%, #6030a0 100%);
+  box-shadow:
+    0 5px 0 #3a1060,
+    inset 0 2px 4px rgba(255,255,255,0.25),
+    inset 0 -3px 6px rgba(0,0,0,0.35),
+    0 0 14px rgba(150,70,255,0.25);
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
   pointer-events: all;
+  cursor: grab;
 }
+#joystick-base:active { cursor: grabbing; }
 
-.dpad-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #4a2070;
-}
-
-.dpad-up    { grid-area: up; }
-.dpad-left  { grid-area: left; }
-.dpad-center {
-  grid-area: center;
-  background: linear-gradient(135deg, #c0a0e0 0%, #a880d0 100%);
-  font-size: 8px;
+#joystick-knob {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0d8ff 0%, #c090f0 45%, #9050d0 100%);
+  box-shadow:
+    0 3px 0 #5020a0,
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    0 0 8px rgba(200,120,255,0.35);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
+  will-change: transform;
 }
-.dpad-right { grid-area: right; }
-.dpad-down  { grid-area: down; }
 
 /* ---------- Center Buttons ---------- */
 #center-buttons {
@@ -304,37 +295,62 @@
 .btn-b:active { box-shadow: 0 1px 0 #440099; }
 
 /* ---------- Responsive Console ---------- */
-@media (max-width: 460px) {
+@media (max-width: 480px) {
   #console-shell {
     width: 100vw;
-    border-radius: 0;
     min-height: 100dvh;
+    border-radius: 0;
+    padding: 6px 8px 12px;
+    gap: 6px;
     justify-content: center;
   }
 
   #screen-bezel {
-    padding: 8px;
+    padding: 6px;
   }
 
-  #dpad {
-    width: 80px;
-    height: 80px;
+  #screen-inner {
+    /* Use aspect-ratio instead of padding-top trick for cleaner scaling */
+    padding-top: 0;
+    aspect-ratio: 3 / 2;
+    width: 100%;
+    position: relative;
+  }
+
+  #controls-section {
+    min-height: 96px;
+    padding: 4px 6px;
+  }
+
+  #joystick-base {
+    width: 84px;
+    height: 84px;
+  }
+
+  #joystick-knob {
+    width: 38px;
+    height: 38px;
   }
 
   .action-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 9px;
+    width: 40px;
+    height: 40px;
+    font-size: 11px;
   }
 
   #action-btn-layout {
-    grid-template-columns: 32px 32px;
-    grid-template-rows: 32px 32px;
+    grid-template-columns: 40px 40px;
+    grid-template-rows: 40px 40px;
+  }
+
+  .sys-btn {
+    font-size: 5px;
+    padding: 5px 10px;
   }
 }
 
 @media (min-width: 700px) and (min-height: 700px) {
   #console-shell {
-    width: 480px;
+    width: 500px;
   }
 }

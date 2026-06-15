@@ -57,12 +57,12 @@ function createSunflowerTown() {
     new Collectible(25,  2, 'memory', 2),   // Memory #2
   ];
 
-  // Transition to forest (east side, row 17-18)
+  // Transition to forest (east side, row 17-18) — placed 1 tile inside the border wall
   map.transitions = [
     {
-      x: (W - 1) * TILE_SIZE, y: 17 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
-      target: 'whispering_forest', spawnX: 2, spawnY: 17
+      x: (W - 2) * TILE_SIZE, y: 17 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
+      target: 'whispering_forest', spawnX: 3, spawnY: 17
     }
   ];
 

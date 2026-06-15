@@ -36,8 +36,15 @@ const Menus = (() => {
     else if (action === 'title')     { closePause(); if (game.goToTitle) game.goToTitle(); }
   }
   pauseItems.forEach((item, i) => {
-    item.addEventListener('click', () => { pauseIdx = i; updatePauseCursor(); });
-    item.addEventListener('touchend', (e) => { e.preventDefault(); pauseIdx = i; updatePauseCursor(); });
+    const execute = (e) => {
+      if (e.type === 'touchend') e.preventDefault();
+      pauseIdx = i;
+      updatePauseCursor();
+      // Game is a global defined after Menus; safe to reference at event-fire time
+      pauseConfirm({ state: Game.state, goToTitle: Game.goToTitle, changeMap: Game.changeMap });
+    };
+    item.addEventListener('click',    execute);
+    item.addEventListener('touchend', execute);
   });
 
   // ── Memory Panel ────────────────────────────────────────────

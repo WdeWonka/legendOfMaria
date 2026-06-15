@@ -61,18 +61,18 @@ function createCrystalCave() {
     new Collectible(8,  15, 'coin',   null),
   ];
 
-  // Transitions
+  // Transitions — placed 1 tile inside border walls to be reachable
   map.transitions = [
     // Back to Crystal Lake (west)
     {
-      x: 0, y: 8 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
-      target: 'crystal_lake', spawnX: 27, spawnY: 8
+      x: TILE_SIZE, y: 8 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
+      target: 'crystal_lake', spawnX: 26, spawnY: 8
     },
     // To Championship Arena (needs both items - checked in game.js)
     {
-      x: (W - 1) * TILE_SIZE, y: 8 * TILE_SIZE,
-      w: TILE_SIZE, h: TILE_SIZE * 2,
+      x: (W - 2) * TILE_SIZE, y: 8 * TILE_SIZE,
+      w: TILE_SIZE * 2, h: TILE_SIZE * 2,
       target: 'championship_arena', spawnX: 15, spawnY: 16
     }
   ];

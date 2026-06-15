@@ -42,7 +42,6 @@ class Enemy {
   update(dt, player, map) {
     if (this.dead) {
       this.deathTimer += dt;
-      Utils.updateSparkles(null, this.sparkles, dt);
       return;
     }
 
